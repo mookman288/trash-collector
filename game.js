@@ -218,6 +218,8 @@ _util.intervalAdmin = function() {
 			_util.intervalEmployee();
 			_util.intervalAdmin();
 
+			_util.removeClass(pause, 'paused');
+
 			pause.innerHTML = 'Pause';
 		}
 	};

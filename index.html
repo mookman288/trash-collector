@@ -6,9 +6,14 @@
 		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
 	</head>
 	<body class="pv2 ph3 sans-serif flex flex-column items-center justify-center">
-		<header class="w-100 w-50-ns bg-dark-blue washed-blue">
-			<div class="ph3 w-100 w-50-ns">
+		<header class="w-100 w-50-ns flex items-center bg-dark-blue washed-blue">
+			<div class="ph3 w-80">
 				<h1>Trash Collector</h1>
+			</div>
+			<div class="ph3 w-20 tr">
+				<button id="pause" class="pa2 ba br2 b--blue bg-light-blue navy">
+					Pause
+				</button>
 			</div>
 		</header>
 		<main class="w-100 w-50-ns">
@@ -21,10 +26,15 @@
 				<h2 class="w-40 w-30-ns">
 					Your Game:
 				</h2>
-				<input id="gameId" value="" readonly="readonly" class="pa2 ba br1 bg-lightest-blue w-100" />
+				<div class="w-100">
+					<input id="gameId" value="" type="text" readonly="readonly" class="pa2 ba br1 bg-lightest-blue w-100" />
+					<small>
+						You can bookmark this page to save your game.
+					</small>
+				</div>
 			</header>
-			<section class="flex justify-start">
-				<aside class="ph3 w-100 w-50-ns bg-pink washed-blue">
+			<section class="flex flex-wrap justify-start">
+				<aside class="ph3 w-100 w-40-ns bg-pink washed-blue">
 					<h3>Your business</h3>
 					<table class="mb3 pa1 ba br1 w-100 collapse bg-white black">
 						<tbody>
@@ -36,7 +46,6 @@
 								<th class="tl pa2">Cash</th>
 								<td id="cash" class="pa2 tr">$0.00</td>
 							</tr>
-							<!--
 							<tr class="striped--moon-gray">
 								<th class="tl pa2">Employees</th>
 								<td id="employees" class="pa2 tr">0</td>
@@ -45,21 +54,30 @@
 								<th class="tl pa2">Administrators</th>
 								<td id="admins" class="pa2 tr">0</td>
 							</tr>
-							-->
 						</tbody>
 					</table>
 				</aside>
-				<section class="ph3 w-100 bg-purple washed-blue">
+				<section class="ph3 w-100 w-60-ns bg-purple washed-blue">
 					<h3>What do you want to do?</h3>
-					<div id="showCollectTrash" class="db tc">
-						<button id="collectTrash" class="pa3 ba br2 b--green bg-light-green navy">
+					<div id="showCollectTrash" class="mb3 db tc">
+						<button id="collectTrash" class="pa3 ba br2 b--blue bg-light-blue navy">
 							Collect Trash
+						</button>
+					</div>
+					<div id="showHireEmployee" class="mb3 dn tc">
+						<button id="hireEmployee" class="pa3 ba br2 b--green bg-light-green navy">
+							Hire Employee ($50.00 Training)
+						</button>
+					</div>
+					<div id="showHireAdmin" class="mb3 dn tc">
+						<button id="hireAdmin" class="pa3 ba br2 b--pink bg-light-pink navy">
+							Hire Administrator ($150.00 Training)
 						</button>
 					</div>
 				</section>
 			</section>
 			<footer>
-
+				<div id="info" class="w-100 pa3 bg-light-yellow dn"></div>
 			</footer>
 		</main>
 		<footer class="pv3 w-100 w-50-ns tc">

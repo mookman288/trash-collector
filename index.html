@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Trash Collector</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
+	</head>
+	<body class="pv2 ph3 sans-serif flex flex-column items-center justify-center">
+		<header class="w-100 w-50-ns bg-dark-blue washed-blue">
+			<div class="ph3 w-100 w-50-ns">
+				<h1>Trash Collector</h1>
+			</div>
+		</header>
+		<main class="w-100 w-50-ns">
+			<noscript>
+				<div class="pa3 bg-dark-red washed-blue">
+					You must enable JavaScript to view this site.
+				</div>
+			</noscript>
+			<header class="ph3 bg-green washed-blue flex items-center">
+				<h2 class="w-40 w-30-ns">
+					Your Game:
+				</h2>
+				<input id="gameId" value="" readonly="readonly" class="pa2 ba br1 bg-lightest-blue w-100" />
+			</header>
+			<section class="flex justify-start">
+				<aside class="ph3 w-100 w-50-ns bg-pink washed-blue">
+					<h3>Your business</h3>
+					<table class="mb3 pa1 ba br1 w-100 collapse bg-white black">
+						<tbody>
+							<tr class="striped--moon-gray">
+								<th class="tl pa2">Trash Collected</th>
+								<td id="trash" class="pa2 tr">0</td>
+							</tr>
+							<tr class="striped--moon-gray">
+								<th class="tl pa2">Cash</th>
+								<td id="cash" class="pa2 tr">$0.00</td>
+							</tr>
+							<!--
+							<tr class="striped--moon-gray">
+								<th class="tl pa2">Employees</th>
+								<td id="employees" class="pa2 tr">0</td>
+							</tr>
+							<tr class="striped--moon-gray">
+								<th class="tl pa2">Administrators</th>
+								<td id="admins" class="pa2 tr">0</td>
+							</tr>
+							-->
+						</tbody>
+					</table>
+				</aside>
+				<section class="ph3 w-100 bg-purple washed-blue">
+					<h3>What do you want to do?</h3>
+					<div id="showCollectTrash" class="db tc">
+						<button id="collectTrash" class="pa3 ba br2 b--green bg-light-green navy">
+							Collect Trash
+						</button>
+					</div>
+				</section>
+			</section>
+			<footer>
+
+			</footer>
+		</main>
+		<footer class="pv3 w-100 w-50-ns tc">
+			<button id="resetGame" class="pa2 ba br2 b--light-yellow bg-gold white">
+				Reset Game
+			</button>
+		</footer>
+		<script type="text/javascript" src="game.js"></script>
+	</body>
+</html>

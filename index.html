@@ -6,11 +6,11 @@
 		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
 	</head>
 	<body class="pv2 ph3 sans-serif flex flex-column items-center justify-center">
-		<header class="w-100 w-80-m w-50-l flex items-center bg-dark-blue washed-blue">
-			<div class="ph3 w-80">
+		<header class="w-100 w-80-m w-50-l flex justify-between items-center bg-dark-blue washed-blue">
+			<div class="ph3">
 				<h1>Trash Collector</h1>
 			</div>
-			<div class="ph3 w-20 tr">
+			<div class="ph3 tr">
 				<button id="pause" class="pa2 ba br2 b--blue bg-light-blue navy pointer">
 					Pause
 				</button>
@@ -34,7 +34,7 @@
 				</div>
 			</header>
 			<section class="flex flex-wrap justify-start">
-				<aside class="ph3 w-100 w-50-m w-40-l bg-pink washed-blue">
+				<aside class="ph3 w-100 w-50-m w-50-l bg-pink washed-blue">
 					<h3>Your business</h3>
 					<table class="mb3 pa1 ba br1 w-100 collapse bg-white black">
 						<tbody>
@@ -54,10 +54,14 @@
 								<th class="tl pa2">Admins</th>
 								<td id="admins" class="pa2 tr">0</td>
 							</tr>
+							<tr class="striped--moon-gray">
+								<th class="tl pa2">Recyclers</th>
+								<td id="recyclers" class="pa2 tr">0</td>
+							</tr>
 						</tbody>
 					</table>
 				</aside>
-				<section class="ph3 w-100 w-50-m w-60-l bg-purple washed-blue">
+				<section class="ph3 w-100 w-50-m w-50-l bg-purple washed-blue">
 					<h3>What do you want to do?</h3>
 					<div id="showCollectTrash" class="mb3 db tc">
 						<button id="collectTrash" class="pa3 ba br2 b--blue bg-light-blue navy pointer">
@@ -72,6 +76,11 @@
 					<div id="showHireAdmin" class="mb3 dn tc">
 						<button id="hireAdmin" class="pa3 ba br2 b--pink bg-light-pink navy pointer">
 							Hire Administrator ($150.00 Training)
+						</button>
+					</div>
+					<div id="showHireRecycler" class="mb3 dn tc">
+						<button id="hireRecycler" class="pa3 ba br2 b--orange bg-light-yellow navy pointer">
+							Purchase Recycling Machine ($10,000)
 						</button>
 					</div>
 				</section>

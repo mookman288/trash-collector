@@ -4,12 +4,14 @@ var _util = {
 		trash: 0,
 		cash: 0,
 		employees: 0,
-		admins: 0
+		admins: 0,
+		recyclers: 0
 	},
 	game: null,
 	infoTimer: null,
 	employeeInterval: null,
-	adminInterval: null
+	adminInterval: null,
+	recycleInterval: null
 };
 var _GET = [];
 
@@ -62,6 +64,7 @@ _util.resetGame = function() {
 	_util.save.cash = 0;
 	_util.save.employees = 0;
 	_util.save.admins = 0;
+	_util.save.recyclers = 0;
 
 	_util.saveGame();
 }
@@ -88,6 +91,7 @@ _util.updateStatus = function() {
 	document.getElementById('cash').innerHTML = '$' + _util.formatNumber(_util.save.cash) + '.00';
 	document.getElementById('employees').innerHTML = _util.formatNumber(_util.save.employees);
 	document.getElementById('admins').innerHTML = _util.formatNumber(_util.save.admins);
+	document.getElementById('recyclers').innerHTML = _util.formatNumber(_util.save.recyclers);
 
 	if (_util.save.cash > 50) {
 		_util.replaceClass(document.getElementById('showHireEmployee'), 'dn', 'db');
@@ -100,6 +104,12 @@ _util.updateStatus = function() {
 	} else {
 		_util.replaceClass(document.getElementById('showHireAdmin'), 'db', 'dn');
 	}
+
+	if (_util.save.cash > 10000) {
+		_util.replaceClass(document.getElementById('showHireRecycler'), 'dn', 'db');
+	} else {
+		_util.replaceClass(document.getElementById('showHireRecycler'), 'db', 'dn');
+	}
 };
 
 _util.loadGame = function() {
@@ -111,6 +121,7 @@ _util.loadGame = function() {
 	_util.save.cash = loadSave.cash || _util.save.cash;
 	_util.save.employees = loadSave.employees || _util.save.employees;
 	_util.save.admins = loadSave.admins || _util.save.admins;
+	_util.save.recyclers = loadSave.recyclers || _util.save.recyclers;
 
 	_util.saveGame();
 };
@@ -133,11 +144,33 @@ _util.employeeCollect = function() {
 
 _util.adminCollect = function() {
 	if (_util.save.admins > 0) {
+		var n = 0;
+
 		for(i = 0; i < _util.save.admins; i++) {
 			_util.hireEmployee();
+
+			n++;
 		}
 
-		_util.writeInfo('Your administrators hired ' + i + ' employees.');
+		_util.writeInfo('Your administrators hired ' + _util.formatNumber(n) + ' employees.');
+	}
+};
+
+_util.recycleCollect = function() {
+	if (_util.save.recyclers > 0) {
+		var n = 0;
+
+		for(i = 0; i < _util.save.recyclers; i++) {
+			if (_util.save.trash > 5000) {
+				_util.save.trash -= 5000;
+				_util.save.cash += 500;
+				n++;
+
+				_util.saveGame();
+			}
+		}
+
+		_util.writeInfo('You recycled ' + _util.formatNumber(n * 10000) + ' trash collections.');
 	}
 };
 
@@ -159,6 +192,15 @@ _util.hireAdmin = function() {
 	}
 };
 
+_util.hireRecycler = function() {
+	if (_util.save.cash > 10000) {
+		_util.save.cash -= 10000;
+		_util.save.recyclers += 1;
+
+		_util.saveGame();
+	}
+};
+
 _util.intervalEmployee = function() {
 	clearInterval(_util.employeeInterval);
 
@@ -173,6 +215,14 @@ _util.intervalAdmin = function() {
 	_util.adminInterval = setInterval(function() {
 		_util.adminCollect();
 	}, 5000);
+};
+
+_util.intervalRecycler = function() {
+	clearInterval(_util.recycleInterval);
+
+	_util.recycleInterval = setInterval(function() {
+		_util.recycleCollect();
+	}, 7000);
 };
 
 (function() {
@@ -201,8 +251,14 @@ _util.intervalAdmin = function() {
 		_util.writeInfo("You've hired an administrator! They will automatically hire employees every five seconds.");
 	}
 
+	document.getElementById('hireRecycler').onclick = function(e) {
+		_util.hireRecycler();
+		_util.writeInfo("You've purchased a recycler! They will automatically recycle trash every seven seconds.");
+	}
+
 	_util.intervalEmployee();
 	_util.intervalAdmin();
+	_util.intervalRecycler();
 
 	var pause = document.getElementById('pause');
 
@@ -210,6 +266,7 @@ _util.intervalAdmin = function() {
 		if (!_util.hasClass(pause, 'paused')) {
 			clearInterval(_util.employeeInterval);
 			clearInterval(_util.adminInterval);
+			clearInterval(_util.recycleInterval);
 
 			_util.addClass(pause, 'paused');
 
@@ -217,6 +274,7 @@ _util.intervalAdmin = function() {
 		} else {
 			_util.intervalEmployee();
 			_util.intervalAdmin();
+			_util.intervalRecycler();
 
 			_util.removeClass(pause, 'paused');
 
